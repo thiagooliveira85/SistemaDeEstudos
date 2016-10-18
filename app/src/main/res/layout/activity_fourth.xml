@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_fourth"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.thiago.sistemadeestudos.FourthActivity"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Progresso das Aulas"
+        android:textSize="30sp"
+        android:paddingBottom="@android:dimen/app_icon_size"/>
+
+    <TextView
+        android:text="Aulas dadas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/aulas"
+        android:textSize="20sp"
+        android:textColor="#228B22"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressAulas"
+        android:layout_weight="@android:integer/config_mediumAnimTime"/>
+
+    <TextView
+        android:text="Exercícios feitos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/exercicios"
+        android:textSize="20sp"
+        android:textColor="#4169E1"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressExercicios"
+        android:layout_weight="@android:integer/config_mediumAnimTime"/>
+
+    <TextView
+        android:text="Laboratórios enviados ao GitHub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/laboratorios"
+        android:textSize="20sp"
+        android:textColor="#68228B"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressLaboratorios"
+        android:layout_weight="@android:integer/config_mediumAnimTime"
+        />
+
+    <Button
+        android:text="Voltar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnVoltar" />
+
+</LinearLayout>

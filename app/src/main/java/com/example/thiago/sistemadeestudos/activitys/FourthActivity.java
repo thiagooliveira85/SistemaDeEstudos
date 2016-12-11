@@ -1,11 +1,12 @@
-package com.example.thiago.sistemadeestudos;
+package com.example.thiago.sistemadeestudos.activitys;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+
+import com.example.thiago.sistemadeestudos.R;
 
 public class FourthActivity extends AppCompatActivity {
 

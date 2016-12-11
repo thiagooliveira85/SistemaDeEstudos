@@ -1,13 +1,23 @@
-package com.example.thiago.sistemadeestudos;
+package com.example.thiago.sistemadeestudos.activitys;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.example.thiago.sistemadeestudos.R;
+import com.example.thiago.sistemadeestudos.bean.Aula;
+import com.example.thiago.sistemadeestudos.bean.Curso;
+import com.example.thiago.sistemadeestudos.business.AulaBusiness;
+import com.example.thiago.sistemadeestudos.dao.AulaDAO;
+import com.example.thiago.sistemadeestudos.dao.CursoDAO;
+import com.example.thiago.sistemadeestudos.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +32,9 @@ public class SecondActivity extends AppCompatActivity {
     private Spinner selectAula;
     private List<String> aulas = new ArrayList<>();
 
+    // Aula selecionada
+    private TextView aulaSelecionada;
+
     // Progresso
     private ProgressBar progresso;
 
@@ -35,11 +48,13 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         addCursos();
-        addAulas();
 
         selectCurso = (Spinner) findViewById(R.id.selectCurso);
         selectAula  = (Spinner) findViewById(R.id.selectAula);
         progresso   = (ProgressBar) findViewById(R.id.progressoGeral);
+
+        configuraAulasPorCurso();
+        configuraAulaSelecionada();
 
         // Insere valores nas combos
         populaCursos();
@@ -53,6 +68,45 @@ public class SecondActivity extends AppCompatActivity {
         configuraBotaoCadastrar();
         configuraBotaoSair();
 
+    }
+
+    private void configuraAulasPorCurso() {
+
+        addAulasByCurso();
+
+        /*selectCurso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
+                aulas.clear();
+                addAulasByCurso();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView arg0) {
+                Util.toastMessage(getApplicationContext(), "Nenhum item selecionado");
+
+            }
+        });*/
+
+    }
+
+    private void configuraAulaSelecionada() {
+        aulaSelecionada = (TextView)findViewById(R.id.nomeAula);
+
+        selectAula.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+
+            @Override
+            public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
+                aulaSelecionada.setText((String) selectAula.getSelectedItem());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView arg0) {
+                Util.toastMessage(getApplicationContext(), "Nenhum item selecionado");
+
+            }
+        });
     }
 
     /**
@@ -101,23 +155,21 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void addCursos() {
-        //Adicionando cursos no ArrayList
-        cursos.add("Selecione o Curso");
-        cursos.add("Java padrão");
-        cursos.add("Java Web");
-        cursos.add("Android");
-        cursos.add("Modelagem");
-        cursos.add("Banco de Dados");
+        List<Curso> lstCursos= new CursoDAO(this).getCursos();
+        if (lstCursos != null && !lstCursos.isEmpty()){
+            for (Curso c : lstCursos){
+                cursos.add(c.getNome());
+            }
+        }
     }
 
-    private void addAulas() {
-        //Adicionando aulas no ArrayList
-        aulas.add("Selecione a Aula");
-        aulas.add("Instalando o Android Studio");
-        aulas.add("Criando componentes");
-        aulas.add("Ajustando layout");
-        aulas.add("Navegando entre telas");
-        aulas.add("Exibindo o aplicativo em um dispositivo físico");
+    private void addAulasByCurso() {
+        List<Aula> lstAulas = AulaBusiness.getInstance().getAulas(this);
+        if (lstAulas != null && !lstAulas.isEmpty()){
+            for (Aula a : lstAulas){
+                aulas.add(a.getNome());
+            }
+        }
     }
 
     private void populaCursos() {
